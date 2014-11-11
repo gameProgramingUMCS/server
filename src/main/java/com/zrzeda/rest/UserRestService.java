@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.util.List;
 
@@ -26,6 +27,16 @@ public class UserRestService {
 
     }
 
+
+
+    @GET
+    @Path("/auth/{userName}/{password}")
+    @Produces("text/plain")
+    public String authorizeUser(@PathParam("userName")  String userName,@PathParam("password")  String password){
+        Boolean authorize = userBean.findUsers(userName,password);
+    //TODO:dodac ciekawsza autoryzacje
+        return authorize.toString();
+    }
 
 
 }
